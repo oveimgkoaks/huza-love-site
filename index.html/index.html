@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Moonlit Love Letter</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1b2a4a 0%, #0a0f1f 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Great Vibes', cursive;
+}
+
+/* 🌌 Stars Background Layers */
+.stars, .stars2, .stars3 {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-repeat: repeat;
+}
+
+.stars {
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(1px 1px at 80% 60%, white, transparent),
+        radial-gradient(1.5px 1.5px at 50% 10%, white, transparent),
+        radial-gradient(1px 1px at 10% 80%, white, transparent);
+    animation: drift 200s linear infinite;
+    opacity: 0.6;
+}
+.stars2 {
+    background-image:
+        radial-gradient(1px 1px at 30% 40%, white, transparent),
+        radial-gradient(1.5px 1.5px at 70% 20%, white, transparent),
+        radial-gradient(1px 1px at 90% 90%, white, transparent);
+    animation: drift 300s linear infinite reverse;
+    opacity: 0.4;
+}
+.stars3 {
+    background-image:
+        radial-gradient(1px 1px at 15% 60%, white, transparent),
+        radial-gradient(2px 2px at 65% 35%, white, transparent),
+        radial-gradient(1px 1px at 85% 15%, white, transparent);
+    animation: drift 400s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes drift {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-2000px); }
+}
+
+/* 🌠 Shooting Star */
+.shooting-star {
+    position: fixed;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(270deg, white, transparent);
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(-45deg);
+    animation: shoot 2s ease-out forwards;
+    filter: drop-shadow(0 0 6px white);
+}
+
+@keyframes shoot {
+    0% { opacity: 0; transform: translate(0,0) rotate(-45deg); }
+    10% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-600px,600px) rotate(-45deg); }
+}
+
+/* 🌙 Moonlight overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top right,
+        rgba(180,200,255,0.25),
+        transparent 60%);
+    pointer-events: none;
+}
+
+/* 🕯️ Candle glow overlay */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at bottom left,
+        rgba(255,170,80,0.18),
+        transparent 60%);
+    animation: candleFlicker 3s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes candleFlicker {
+    0% { opacity: 0.25; }
+    50% { opacity: 0.45; }
+    100% { opacity: 0.3; }
+}
+
+/* 📜 Letter Box */
+.letter {
+    max-width: 90%;
+    width: 850px;
+    padding: 40px 50px;
+    font-size: 6vw; /* responsive font size */
+    line-height: 1.45;
+    color: #3a1f0e;
+    background: linear-gradient(135deg, #e0c18a, #caa463, #b08a57);
+    box-shadow:
+        inset 0 0 45px rgba(0,0,0,0.35),
+        0 25px 50px rgba(0,0,0,0.6);
+    position: relative;
+    cursor: default;
+    border-radius: 6px;
+    display: none; /* hidden until play button */
+    animation: omoriFlicker 1.2s infinite;
+}
+
+/* Paper texture */
+.letter::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.03),
+        rgba(0,0,0,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+}
+
+/* Intense OMORI-style edges flicker */
+@keyframes omoriFlicker {
+    0% { filter: brightness(1); box-shadow: inset 0 0 45px rgba(0,0,0,0.35), 0 25px 50px rgba(0,0,0,0.6); }
+    20% { filter: brightness(0.8); box-shadow: inset 0 0 55px rgba(0,0,0,0.5), 0 25px 50px rgba(0,0,0,0.7); }
+    40% { filter: brightness(1.1); box-shadow: inset 0 0 35px rgba(0,0,0,0.3), 0 25px 45px rgba(0,0,0,0.6); }
+    60% { filter: brightness(0.85); box-shadow: inset 0 0 50px rgba(0,0,0,0.55), 0 25px 50px rgba(0,0,0,0.65); }
+    80% { filter: brightness(1); box-shadow: inset 0 0 45px rgba(0,0,0,0.35), 0 25px 50px rgba(0,0,0,0.6); }
+    100% { filter: brightness(0.9); box-shadow: inset 0 0 55px rgba(0,0,0,0.5), 0 25px 50px rgba(0,0,0,0.7); }
+}
+
+/* Play button */
+#playBtn {
+    position: absolute;
+    padding: 20px 40px;
+    font-size: 24px;
+    background: #e0c18a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+#playBtn:active {
+    transform: scale(0.95);
+}
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+<button id="playBtn">▶ Play Letter</button>
+
+<div class="letter" id="letter">
+from the day I saw you to the day we shall die together, ive loved you and always will love you so so so soooooo unbelievably much, your the bestest cutest and amazingest thing that has ever EVER EVERRRR happened to me oh my sweet Ariana, you may hide things or say that i lying or push me away, but i wont care, im here for yo, im gonna stay ere regardless of anything love, because your the love of my life, even your dark brown hair screams of cuteness and when the sun shines through them its like a fairy has awoken, its such a beautiful sight, your smile i love it, you look so pretty and confident &lt;3, your nose though fat is perfect, i dont care about your body, you could be thin fat hourglass or chubby, and id love you the same my sweet amazing cute darling, oh i love you, i love you sososo oSOOOOOO Much. even if the moon were bribed to stop me i wont, id be kind for you, id change my cold lifeless demeanor for you, for you id become an amazing person, i love you, my sweet cute beautiful ariana, your the best thing that has ever happened to me :&gt; &lt;&lt;333
+<div class="hint">(tap to start music)</div>
+</div>
+
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<script>
+const playBtn = document.getElementById('playBtn');
+const letter = document.getElementById('letter');
+const music = document.getElementById('bgMusic');
+
+/* Play button logic */
+playBtn.onclick = () => {
+    playBtn.style.display = 'none';
+    letter.style.display = 'block';
+    music.play();
+};
+
+/* Spawn shooting star right → left */
+function spawnShootingStar() {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.top = Math.random() * window.innerHeight * 0.4 + 'px';
+    star.style.left = window.innerWidth + 'px';
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 2000);
+}
+setInterval(() => {
+    if (Math.random() < 0.5) spawnShootingStar();
+}, 6000);
+</script>
+</body>
+</html>
